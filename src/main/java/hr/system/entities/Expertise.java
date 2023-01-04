@@ -1,0 +1,69 @@
+package hr.system.entities;
+
+import hr.system.utils.ExpertiseLevel;
+import jakarta.persistence.*;
+
+import java.util.Objects;
+import java.util.UUID;
+
+@Entity
+public class Expertise {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(nullable = false)
+    private UUID id;
+    private String name;
+    private ExpertiseLevel level;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setDd(UUID dd) {
+        this.id = id;
+    }
+
+    public Expertise() {
+    }
+
+    public Expertise(String name, ExpertiseLevel level) {
+        this.name = name;
+        this.level = level;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ExpertiseLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(ExpertiseLevel level) {
+        this.level = level;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Expertise expertise)) return false;
+        return Objects.equals(getName(), expertise.getName()) && getLevel() == expertise.getLevel();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getLevel());
+    }
+
+    @Override
+    public String toString() {
+        return "Expertise{" +
+                "name='" + name + '\'' +
+                ", level=" + level +
+                '}';
+    }
+}
