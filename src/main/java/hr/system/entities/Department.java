@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Department {
     @Id
     @GeneratedValue
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "uuid" )
     private UUID id;
     private String name;
     @OneToOne(cascade = CascadeType.ALL)

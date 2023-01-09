@@ -4,6 +4,7 @@ import hr.system.entities.Employee;
 import hr.system.entities.Salary;
 import hr.system.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<Employee> getEmployees() {
         return employeeService.getEmployees();

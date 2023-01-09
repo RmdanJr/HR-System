@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Employee {
     @Id
     @GeneratedValue
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "uuid" )
     protected UUID id;
     protected String username;
     protected String password;

@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Expertise {
     @Id
     @GeneratedValue
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "uuid" )
     private UUID id;
     private String name;
     private ExpertiseLevel level;
