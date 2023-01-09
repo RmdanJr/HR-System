@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/employees")
 class EmployeeController {
 
     @Autowired
@@ -19,32 +20,32 @@ class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/employees")
+    @GetMapping
     public List<Employee> getEmployees() {
         return employeeService.getEmployees();
     }
 
-    @PostMapping("/employees")
+    @PostMapping
     public Employee addEmployee(@RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("{id}")
     public Employee modifyEmployee(@RequestBody Employee updatedEmployee, @PathVariable UUID id) {
         return employeeService.modifyEmployee(updatedEmployee, id);
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("{id}")
     public void deleteEmployee(@PathVariable UUID id) {
         employeeService.deleteEmployee(id);
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("{id}")
     public Employee getEmployeeInfo(@PathVariable UUID id) {
         return employeeService.getEmployeeInfo(id);
     }
 
-    @GetMapping("/employees/{id}/salary")
+    @GetMapping("{id}/salary")
     public Salary getEmployeeSalary(@PathVariable UUID id) {
         return employeeService.getEmployeeSalary(id);
     }

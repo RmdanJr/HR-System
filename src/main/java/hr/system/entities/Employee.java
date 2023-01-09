@@ -2,8 +2,8 @@ package hr.system.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import hr.system.utils.Gender;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -12,9 +12,12 @@ import java.util.UUID;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue
     @Column(nullable = false)
     protected UUID id;
+    protected String username;
+    protected String password;
+    protected String roles;
     protected String name;
     @JsonFormat(pattern = "yyyy-MM-dd")
     protected Date birthDate;
@@ -40,8 +43,19 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, Date birthDate, Gender gender, Date graduationDate, Salary salary,
-                    List<Expertise> expertises, Department department, Team team) {
+    public Employee(String username, String password, String roles, String name) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.name = name;
+    }
+
+    public Employee(String username, String password, String roles, String name,
+                         Date birthDate, Gender gender, Date graduationDate, Salary salary,
+                         List<Expertise> expertises, Department department, Team team) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
@@ -58,6 +72,30 @@ public class Employee {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public String getName() {
@@ -133,21 +171,24 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getExpertises());
+        return Objects.hash(getId(), getUsername());
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
                 ", name='" + name + '\'' +
                 ", birthDate=" + birthDate +
                 ", gender=" + gender +
                 ", graduationDate=" + graduationDate +
                 ", salary=" + salary +
-                ", expertises=" + expertises +
                 ", department=" + department +
                 ", team=" + team +
+                ", expertises=" + expertises +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package hr.system.entities;
 
 import hr.system.utils.ExpertiseLevel;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -9,7 +9,7 @@ import java.util.UUID;
 @Entity
 public class Expertise {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue
     @Column(nullable = false)
     private UUID id;
     private String name;

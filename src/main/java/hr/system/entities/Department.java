@@ -1,6 +1,6 @@
 package hr.system.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 public class Department {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue
     @Column(nullable = false)
     private UUID id;
     private String name;

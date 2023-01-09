@@ -1,6 +1,6 @@
 package hr.system.entities;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 import java.util.Objects;
 

@@ -1,8 +1,8 @@
 package hr.system.entities;
 
 import hr.system.utils.Gender;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import java.util.Date;
 import java.util.List;
@@ -19,9 +19,14 @@ public class TeamLead extends Employee {
         this.managedTeam = managedTeam;
     }
 
-    public TeamLead(String name, Date birthDate, Gender gender, Date graduationDate, Salary salary,
+    public TeamLead(String username, String password, String roles, String name) {
+        super(username, password, roles, name);
+    }
+
+    public TeamLead(String username, String password, String roles, String name, Date birthDate,
+                    Gender gender, Date graduationDate, Salary salary,
                     List<Expertise> expertises, Department department, Team team, Team managedTeam) {
-        super(name, birthDate, gender, graduationDate, salary, expertises, department, team);
+        super(username, password, roles, name, birthDate, gender, graduationDate, salary, expertises, department, team);
         this.managedTeam = managedTeam;
     }
 
