@@ -1,7 +1,6 @@
 package hr.system.entities;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +10,7 @@ import java.util.UUID;
 public class Department {
     @Id
     @GeneratedValue
-    @Column(nullable = false, columnDefinition = "uuid" )
+    @Column(nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String name;
     @OneToOne(cascade = CascadeType.ALL)
@@ -22,7 +21,8 @@ public class Department {
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private List<Team> teams;
 
-    public Department() {}
+    public Department() {
+    }
 
     public Department(String name) {
         this.name = name;

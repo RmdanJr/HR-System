@@ -1,9 +1,9 @@
 package hr.system.entities;
 
 import hr.system.utils.Gender;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-
 import java.util.Date;
 import java.util.List;
 

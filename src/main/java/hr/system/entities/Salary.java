@@ -1,7 +1,6 @@
 package hr.system.entities;
 
 import javax.persistence.Embeddable;
-
 import java.util.Objects;
 
 @Embeddable

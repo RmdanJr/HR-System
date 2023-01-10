@@ -1,7 +1,6 @@
 package hr.system.entities;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +10,7 @@ import java.util.UUID;
 public class Team {
     @Id
     @GeneratedValue
-    @Column(nullable = false, columnDefinition = "uuid" )
+    @Column(nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String name;
     @ManyToOne
@@ -23,7 +22,8 @@ public class Team {
     @JoinColumn(name = "lead_id")
     private DepartmentManager lead;
 
-    public Team() {}
+    public Team() {
+    }
 
     public Team(String name) {
         this.name = name;

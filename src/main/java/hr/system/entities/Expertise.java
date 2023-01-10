@@ -1,8 +1,11 @@
 package hr.system.entities;
 
 import hr.system.utils.ExpertiseLevel;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -10,18 +13,10 @@ import java.util.UUID;
 public class Expertise {
     @Id
     @GeneratedValue
-    @Column(nullable = false, columnDefinition = "uuid" )
+    @Column(nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String name;
     private ExpertiseLevel level;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setDd(UUID dd) {
-        this.id = id;
-    }
 
     public Expertise() {
     }
@@ -29,6 +24,14 @@ public class Expertise {
     public Expertise(String name, ExpertiseLevel level) {
         this.name = name;
         this.level = level;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setDd(UUID dd) {
+        this.id = id;
     }
 
     public String getName() {
