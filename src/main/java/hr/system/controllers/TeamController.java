@@ -22,7 +22,7 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping("{id}/members")
     List<Employee> getAllMembers(@PathVariable UUID id) {
         return teamService.getTeamMembers(id);

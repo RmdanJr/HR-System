@@ -17,7 +17,6 @@ public class Employee {
     protected UUID id;
     protected String username;
     protected String password;
-    protected String roles;
     protected String name;
     @JsonFormat(pattern = "yyyy-MM-dd")
     protected Date birthDate;
@@ -38,32 +37,25 @@ public class Employee {
     @JoinColumn(name = "team_id")
     protected Team team;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Expertise> expertises;
+    protected List<Expertise> expertises;
+    private String roles = "ROLE_EMPLOYEE";
+    @ManyToOne
+    @JoinColumn(name = "direct_manager_id")
+    private Manager manager;
 
     public Employee() {
     }
 
-    public Employee(String username, String password, String roles, String name) {
+    public Employee(String username, String password, String name, Date birthDate, Gender gender,
+                    Date graduationDate, Salary salary, List<Expertise> expertises) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
-        this.name = name;
-    }
-
-    public Employee(String username, String password, String roles, String name,
-                    Date birthDate, Gender gender, Date graduationDate, Salary salary,
-                    List<Expertise> expertises, Department department, Team team) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
         this.graduationDate = graduationDate;
         this.salary = salary;
         this.expertises = expertises;
-        this.department = department;
-        this.team = team;
     }
 
     public UUID getId() {
@@ -160,6 +152,14 @@ public class Employee {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Manager getDirectManager() {
+        return manager;
+    }
+
+    public void setDirectManager(Manager manager) {
+        this.manager = manager;
     }
 
     @Override

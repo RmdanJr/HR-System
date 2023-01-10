@@ -8,26 +8,34 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class DepartmentManager extends Employee {
+public class DepartmentManager extends Manager {
+    private String roles = "ROLE_EMPLOYEE,ROLE_MANAGER,ROLE_DEPARTMENT_MANAGER";
     @OneToOne(mappedBy = "manager")
     private Department managedDepartment;
 
     public DepartmentManager() {
     }
 
-    public DepartmentManager(Department managedDepartment) {
-        this.managedDepartment = managedDepartment;
+    public DepartmentManager(String username, String password, String name, Date birthDate, Gender gender,
+                             Date graduationDate, Salary salary, List<Expertise> expertises) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.graduationDate = graduationDate;
+        this.salary = salary;
+        this.expertises = expertises;
     }
 
-    public DepartmentManager(String username, String password, String roles, String name) {
-        super(username, password, roles, name);
+    @Override
+    public String getRoles() {
+        return roles;
     }
 
-    public DepartmentManager(String username, String password, String roles, String name, Date birthDate,
-                             Gender gender, Date graduationDate, Salary salary,
-                             List<Expertise> expertises, Department department, Team team, Department managedDepartment) {
-        super(username, password, roles, name, birthDate, gender, graduationDate, salary, expertises, department, team);
-        this.managedDepartment = managedDepartment;
+    @Override
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public Department getManagedDepartment() {

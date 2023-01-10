@@ -21,7 +21,7 @@ class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping
     public List<Employee> getEmployees() {
         return employeeService.getEmployees();

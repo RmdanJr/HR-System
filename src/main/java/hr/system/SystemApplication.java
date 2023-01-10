@@ -19,8 +19,7 @@ public class SystemApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(EmployeeRepository users, PasswordEncoder encoder) {
 		return args -> {
-			users.save(new Employee("hassan.ramadan", encoder.encode("rmdanjr"),"ROLE_USER", "Hassan Ramadan"));
-			users.save(new TeamLead("ayman.shebl",encoder.encode("shebljr"),"ROLE_USER,ROLE_ADMIN", "Ayman Shebl"));
+
 		};
 	}
 }
