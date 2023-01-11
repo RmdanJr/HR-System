@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Employee {
     @Id
     @GeneratedValue
@@ -31,15 +32,12 @@ public class Employee {
     })
     protected Salary salary;
     @ManyToOne
-    @JoinColumn(name = "department_id")
     protected Department department;
     @ManyToOne
-    @JoinColumn(name = "team_id")
     protected Team team;
     @OneToMany(cascade = CascadeType.ALL)
     protected List<Expertise> expertises;
     @ManyToOne
-    @JoinColumn(name = "direct_manager_id")
     protected Manager manager;
     private String roles = "ROLE_EMPLOYEE";
 

@@ -1,22 +1,22 @@
 package hr.system.services;
 
-import hr.system.repositories.ManagerRepository;
+import hr.system.repositories.TeamLeadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-public class ManagerService {
+public class TeamLeadService {
     @Autowired
-    private final ManagerRepository managerRepository;
+    private final TeamLeadRepository teamLeadRepository;
 
-    public ManagerService(ManagerRepository managerRepository) {
-        this.managerRepository = managerRepository;
+    public TeamLeadService(TeamLeadRepository teamLeadRepository) {
+        this.teamLeadRepository = teamLeadRepository;
     }
 
-    public void deleteManager(UUID id) {
-        managerRepository.deleteById(id);
+    public void deleteTeamLead(UUID id) {
+        teamLeadRepository.deleteById(id);
 //                .orElseThrow(() -> new EmployeeNotFoundException(id));
 //        if (manager.getManager() == null) return;
 //        Manager directManager = manager.getManager();

@@ -23,4 +23,15 @@ public class DepartmentManagerService {
         List<Employee> employees = manager.getManagedDepartment().getEmployees();
         return employees;
     }
+
+    public void deleteDepartmentManager(UUID id) {
+        repository.deleteById(id);
+//                .orElseThrow(() -> new EmployeeNotFoundException(id));
+//        if (manager.getManager() == null) return;
+//        Manager directManager = manager.getManager();
+//        for (Employee employee : manager.getManagedEmployees()) {
+//            employee.setManager(directManager);
+//        }
+//        managerRepository.delete(manager);
+    }
 }

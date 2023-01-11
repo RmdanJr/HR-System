@@ -2,6 +2,7 @@ package hr.system.controllers;
 
 import hr.system.services.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/managers")
+@PreAuthorize("hasRole('MANAGER')")
 public class ManagerController {
     @Autowired
     private final ManagerService managerService;

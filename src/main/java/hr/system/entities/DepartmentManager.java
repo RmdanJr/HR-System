@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class DepartmentManager extends Manager {
+public class DepartmentManager extends Employee {
     private String roles = "ROLE_EMPLOYEE,ROLE_MANAGER,ROLE_DEPARTMENT_MANAGER";
     @OneToOne
     private Department managedDepartment;

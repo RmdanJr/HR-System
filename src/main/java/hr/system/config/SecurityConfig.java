@@ -26,10 +26,11 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.ignoringAntMatchers("/h2-console/**"))
+                .csrf().disable()
+                .cors().disable()
                 .authorizeRequests(auth -> auth
                         .antMatchers("/h2-console/**").permitAll()
-                        .mvcMatchers("/api/employees/**", "/api/managers/**").permitAll()
+                        .mvcMatchers("/api/employees/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(myUserDetailsService)

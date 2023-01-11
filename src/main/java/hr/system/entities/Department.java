@@ -13,7 +13,6 @@ public class Department {
     private UUID id;
     private String name;
     @OneToOne
-    @JoinColumn(name = "manager_id")
     private DepartmentManager manager;
     @OneToMany
     private List<Employee> employees;

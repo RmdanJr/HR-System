@@ -14,12 +14,10 @@ public class Team {
     private UUID id;
     private String name;
     @ManyToOne
-    @JoinColumn(name = "department_id")
     private Department department;
     @OneToMany
     private List<Employee> members;
     @OneToOne
-    @JoinColumn(name = "lead_id")
     private TeamLead lead;
 
     public Team() {
