@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class DepartmentManager extends Manager {
     private String roles = "ROLE_EMPLOYEE,ROLE_MANAGER,ROLE_DEPARTMENT_MANAGER";
-    @OneToOne(mappedBy = "manager")
+    @OneToOne
     private Department managedDepartment;
 
     public DepartmentManager() {

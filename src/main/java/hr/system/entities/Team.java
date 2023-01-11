@@ -16,11 +16,11 @@ public class Team {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
-    @OneToMany(mappedBy = "team")
+    @OneToMany
     private List<Employee> members;
     @OneToOne
     @JoinColumn(name = "lead_id")
-    private DepartmentManager lead;
+    private TeamLead lead;
 
     public Team() {
     }
@@ -30,10 +30,18 @@ public class Team {
         this.members = new ArrayList<>();
     }
 
-    public Team(String name, Department department, List<Employee> members, DepartmentManager lead) {
+    public Team(String name, Department department, List<Employee> members, TeamLead lead) {
         this.name = name;
         this.department = department;
         this.members = members;
+        this.lead = lead;
+    }
+
+    public TeamLead getLead() {
+        return lead;
+    }
+
+    public void setLead(TeamLead lead) {
         this.lead = lead;
     }
 

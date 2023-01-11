@@ -38,10 +38,10 @@ public class Employee {
     protected Team team;
     @OneToMany(cascade = CascadeType.ALL)
     protected List<Expertise> expertises;
-    private String roles = "ROLE_EMPLOYEE";
     @ManyToOne
     @JoinColumn(name = "direct_manager_id")
-    private Manager manager;
+    protected Manager manager;
+    private String roles = "ROLE_EMPLOYEE";
 
     public Employee() {
     }
@@ -56,6 +56,14 @@ public class Employee {
         this.graduationDate = graduationDate;
         this.salary = salary;
         this.expertises = expertises;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     public UUID getId() {

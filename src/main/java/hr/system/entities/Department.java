@@ -1,7 +1,6 @@
 package hr.system.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,21 +12,15 @@ public class Department {
     @Column(nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "manager_id")
     private DepartmentManager manager;
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Employee> employees;
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Team> teams;
 
     public Department() {
-    }
-
-    public Department(String name) {
-        this.name = name;
-        this.employees = new ArrayList<>();
-        this.teams = new ArrayList<>();
     }
 
     public Department(String name, DepartmentManager manager, List<Employee> employees, List<Team> teams) {
