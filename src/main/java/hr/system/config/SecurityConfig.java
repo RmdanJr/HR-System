@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.ignoringAntMatchers("/h2-console/**"))
                 .authorizeRequests(auth -> auth
                         .antMatchers("/h2-console/**").permitAll()
-                        .mvcMatchers("/api/employees/**").permitAll()
+                        .mvcMatchers("/api/employees/**", "/api/managers/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(myUserDetailsService)

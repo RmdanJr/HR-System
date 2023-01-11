@@ -6,7 +6,6 @@ import hr.system.entities.Salary;
 import hr.system.mappers.EmployeeMapper;
 import hr.system.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +26,6 @@ class EmployeeController {
         this.employeeMapper = employeeMapper;
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping
     public List<EmployeeDTO> getEmployees() {
         return employeeService.getEmployees().stream()

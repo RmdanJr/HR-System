@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/manager")
+@RequestMapping("/api/department/manager")
 public class DepartmentManagerController {
     @Autowired
     private final DepartmentManagerService managerService;

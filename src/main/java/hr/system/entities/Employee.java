@@ -58,14 +58,6 @@ public class Employee {
         this.expertises = expertises;
     }
 
-    public Manager getManager() {
-        return manager;
-    }
-
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
-
     public UUID getId() {
         return id;
     }
@@ -162,11 +154,11 @@ public class Employee {
         this.team = team;
     }
 
-    public Manager getDirectManager() {
+    public Manager getManager() {
         return manager;
     }
 
-    public void setDirectManager(Manager manager) {
+    public void setManager(Manager manager) {
         this.manager = manager;
     }
 
