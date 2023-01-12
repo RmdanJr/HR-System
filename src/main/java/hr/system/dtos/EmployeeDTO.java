@@ -1,6 +1,7 @@
 package hr.system.dtos;
 
-import hr.system.entities.*;
+import hr.system.entities.Expertise;
+import hr.system.entities.Salary;
 import hr.system.utils.types.Gender;
 
 import java.util.ArrayList;

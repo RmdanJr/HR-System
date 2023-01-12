@@ -1,17 +1,13 @@
 package hr.system.services;
 
-import hr.system.entities.*;
+import hr.system.entities.Employee;
+import hr.system.entities.Salary;
 import hr.system.repositories.EmployeeRepository;
 import hr.system.utils.exceptions.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,16 +36,16 @@ public class EmployeeService {
     @Transactional
     public void deleteEmployee(UUID id) {
         Employee employee = repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+        if(employee.getManager() == null && !employee.getManagedEmployees().isEmpty()) return;
         employee.setTeam(null);
-        Employee directManager = employee.getManager();
-        employee.setManager(null);
         employee.setDepartment(null);
         employee.setManagedTeam(null);
         employee.setManagedDepartment(null);
+        Employee directManager = employee.getManager();
         employee.getManagedEmployees().forEach(managedEmployee -> {
-            managedEmployee.setManager(null);
             managedEmployee.setManager(directManager);
         });
+        employee.setManager(null);
         employee.setManagedEmployees(null);
         repository.deleteById(id);
     }
