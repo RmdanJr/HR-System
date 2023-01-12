@@ -1,6 +1,6 @@
 package hr.system.entities;
 
-import hr.system.utils.ExpertiseLevel;
+import hr.system.utils.types.ExpertiseLevel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +16,13 @@ public class Expertise {
     @Column(nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String name;
-    private ExpertiseLevel level;
+    private ExpertiseLevel level = ExpertiseLevel.NOT_RESPONDED;
 
     public Expertise() {
+    }
+
+    public Expertise(String name) {
+        this.name = name;
     }
 
     public Expertise(String name, ExpertiseLevel level) {

@@ -9,12 +9,11 @@ import org.springframework.stereotype.Component;
 public class EmployeeTeamMapper {
     public EmployeeTeamDTO convertToDto(Team team) {
         EmployeeTeamDTO employeeTeamDTO = new EmployeeTeamDTO();
-        if (team != null) {
-            employeeTeamDTO.setName(team.getName());
-            if (team.getLead() != null) {
-                employeeTeamDTO.setTeamLead(team.getLead().getName());
-            }
-        }
+        if (team == null) return employeeTeamDTO;
+        employeeTeamDTO.setId(team.getId());
+        employeeTeamDTO.setName(team.getName());
+        if (team.getLead() == null) return employeeTeamDTO;
+        employeeTeamDTO.setTeamLead(team.getLead().getName());
         return employeeTeamDTO;
     }
 }

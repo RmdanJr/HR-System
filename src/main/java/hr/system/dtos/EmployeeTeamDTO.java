@@ -1,12 +1,23 @@
 package hr.system.dtos;
 
+import java.util.UUID;
+
 public class EmployeeTeamDTO {
+    private UUID id;
     private String name;
     private String teamLead;
 
     public EmployeeTeamDTO() {
         this.name = "";
         this.teamLead = "";
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {

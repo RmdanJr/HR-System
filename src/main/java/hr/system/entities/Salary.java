@@ -12,7 +12,7 @@ public class Salary {
     public Salary() {
     }
 
-    public Salary(long gross) {
+    public Salary(double gross) {
         this.gross = gross;
         this.insuranceAmount = 500;
         this.net = 0.85 * gross - insuranceAmount;

@@ -3,6 +3,7 @@ package hr.system.services;
 import hr.system.entities.Employee;
 import hr.system.entities.Team;
 import hr.system.repositories.TeamRepository;
+import hr.system.utils.exceptions.TeamNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class TeamService {
     }
 
     public List<Employee> getTeamMembers(UUID id) {
-        Optional<Team> team = this.repository.findById(id);
-        return team.get().getMembers();
+        Team team = this.repository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
+        return team.getMembers();
     }
 }

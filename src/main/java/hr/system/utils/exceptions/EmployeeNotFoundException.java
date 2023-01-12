@@ -1,4 +1,4 @@
-package hr.system.utils;
+package hr.system.utils.exceptions;
 
 import java.util.UUID;
 

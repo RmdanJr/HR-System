@@ -14,32 +14,28 @@ public class Team {
     private UUID id;
     private String name;
     @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
-    @OneToMany
-    private List<Employee> members;
-    @OneToOne
-    private TeamLead lead;
+    @OneToOne(mappedBy = "managedTeam")
+    private Employee lead;
+    @OneToMany(mappedBy = "team")
+    private List<Employee> members = new ArrayList<>();
 
     public Team() {
     }
 
     public Team(String name) {
         this.name = name;
-        this.members = new ArrayList<>();
     }
 
-    public Team(String name, Department department, List<Employee> members, TeamLead lead) {
+    public Team(String name, Department department) {
+
+    }
+
+    public Team(String name, Department department, List<Employee> members, Employee lead) {
         this.name = name;
         this.department = department;
         this.members = members;
-        this.lead = lead;
-    }
-
-    public TeamLead getLead() {
-        return lead;
-    }
-
-    public void setLead(TeamLead lead) {
         this.lead = lead;
     }
 
@@ -67,6 +63,14 @@ public class Team {
         this.department = department;
     }
 
+    public Employee getLead() {
+        return lead;
+    }
+
+    public void setLead(Employee lead) {
+        this.lead = lead;
+    }
+
     public List<Employee> getMembers() {
         return members;
     }
@@ -92,9 +96,9 @@ public class Team {
         return "Team{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", department=" + department +
-                ", members=" + members +
-                ", lead=" + lead +
+                ", department=" + department.getName() +
+                ", lead=" + lead.getName() +
+                ", members=" + members.stream().map(Employee::getName).toList() +
                 '}';
     }
 }

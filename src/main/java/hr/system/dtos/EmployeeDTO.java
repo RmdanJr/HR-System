@@ -1,9 +1,9 @@
 package hr.system.dtos;
 
-import hr.system.entities.Expertise;
-import hr.system.entities.Salary;
-import hr.system.utils.Gender;
+import hr.system.entities.*;
+import hr.system.utils.types.Gender;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +20,9 @@ public class EmployeeDTO {
     private EmployeeDepartmentDTO department;
     private EmployeeTeamDTO team;
     private String manager;
+    private EmployeeDepartmentDTO managedDepartment;
+    private EmployeeTeamDTO managedTeam;
+    private List<String> managedEmployees = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -107,5 +110,29 @@ public class EmployeeDTO {
 
     public void setManager(String manager) {
         this.manager = manager;
+    }
+
+    public EmployeeDepartmentDTO getManagedDepartment() {
+        return managedDepartment;
+    }
+
+    public void setManagedDepartment(EmployeeDepartmentDTO managedDepartment) {
+        this.managedDepartment = managedDepartment;
+    }
+
+    public EmployeeTeamDTO getManagedTeam() {
+        return managedTeam;
+    }
+
+    public void setManagedTeam(EmployeeTeamDTO managedTeam) {
+        this.managedTeam = managedTeam;
+    }
+
+    public List<String> getManagedEmployees() {
+        return managedEmployees;
+    }
+
+    public void setManagedEmployees(List<String> managedEmployees) {
+        this.managedEmployees = managedEmployees;
     }
 }

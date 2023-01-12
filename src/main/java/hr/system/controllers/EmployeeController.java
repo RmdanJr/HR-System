@@ -6,6 +6,7 @@ import hr.system.entities.Salary;
 import hr.system.mappers.EmployeeMapper;
 import hr.system.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,5 +57,12 @@ class EmployeeController {
     @GetMapping("{id}/salary")
     public Salary getEmployeeSalary(@PathVariable UUID id) {
         return employeeService.getEmployeeSalary(id);
+    }
+
+    @PreAuthorize("hasRole('MANAGER')")
+    @GetMapping("manager/{id}")
+    public List<EmployeeDTO> getManagedEmployees(@PathVariable UUID id) {
+        return employeeService.getManagedEmployees(id).stream()
+                .map(employeeMapper::convertToDto).collect(Collectors.toList());
     }
 }

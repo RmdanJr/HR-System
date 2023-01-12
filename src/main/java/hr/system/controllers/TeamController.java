@@ -27,7 +27,6 @@ public class TeamController {
         this.employeeMapper = employeeMapper;
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping("{id}/members")
     List<EmployeeDTO> getAllMembers(@PathVariable UUID id) {
         return teamService.getTeamMembers(id).stream()

@@ -1,6 +1,7 @@
 package hr.system.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -12,21 +13,25 @@ public class Department {
     @Column(nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String name;
-    @OneToOne
-    private DepartmentManager manager;
-    @OneToMany
-    private List<Employee> employees;
-    @OneToMany
-    private List<Team> teams;
+    @OneToOne(mappedBy = "managedDepartment")
+    private Employee manager;
+    @OneToMany(mappedBy = "department")
+    private List<Team> teams = new ArrayList<>();
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees = new ArrayList<>();
 
     public Department() {
     }
 
-    public Department(String name, DepartmentManager manager, List<Employee> employees, List<Team> teams) {
+    public Department(String name) {
+        this.name = name;
+    }
+
+    public Department(String name, Employee manager, List<Team> teams, List<Employee> employees) {
         this.name = name;
         this.manager = manager;
-        this.employees = employees;
         this.teams = teams;
+        this.employees = employees;
     }
 
     public UUID getId() {
@@ -45,20 +50,12 @@ public class Department {
         this.name = name;
     }
 
-    public DepartmentManager getManager() {
+    public Employee getManager() {
         return manager;
     }
 
-    public void setManager(DepartmentManager manager) {
+    public void setManager(Employee manager) {
         this.manager = manager;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 
     public List<Team> getTeams() {
@@ -67,6 +64,14 @@ public class Department {
 
     public void setTeams(List<Team> teams) {
         this.teams = teams;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
@@ -86,9 +91,9 @@ public class Department {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", manager=" + manager +
-                ", employees=" + employees +
-                ", teams=" + teams +
+                ", manager=" + manager.getName() +
+                ", teams=" + teams.stream().map(Team::getName).toList() +
+                ", employees=" + employees.stream().map(Employee::getName).toList() +
                 '}';
     }
 }
