@@ -19,7 +19,9 @@ public class EmployeeMapper {
 
     public EmployeeDTO convertToDto(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        if (employee == null) return employeeDTO;
+        if (employee == null) {
+            return employeeDTO;
+        }
         employeeDTO.setId(employee.getId());
         employeeDTO.setUsername(employee.getUsername());
         employeeDTO.setName(employee.getName());
@@ -30,8 +32,12 @@ public class EmployeeMapper {
         employeeDTO.setExpertises(employee.getExpertises());
         employeeDTO.setDepartment(employeeDepartmentMapper.convertToDto(employee.getDepartment()));
         employeeDTO.setTeam(employeeTeamMapper.convertToDto(employee.getTeam()));
-        if (employee.getManager() == null) return employeeDTO;
-        employeeDTO.setManager(employee.getManager().getName());
+        if (employee.getManager() != null) {
+            employeeDTO.setManager(employee.getManager().getName());
+        }
+        employeeDTO.setManagedDepartment(employeeDepartmentMapper.convertToDto(employee.getManagedDepartment()));
+        employeeDTO.setManagedTeam(employeeTeamMapper.convertToDto(employee.getManagedTeam()));
+        employeeDTO.setManagedEmployees(employee.getManagedEmployees().stream().map(Employee::getName).toList());
         return employeeDTO;
     }
 }
