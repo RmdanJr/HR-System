@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .cors().disable()
                 .authorizeRequests(auth -> auth
                         .antMatchers("/h2-console/**").permitAll()
-                        .mvcMatchers("/api/employees/**", "/api/team/**").permitAll()
+                        .mvcMatchers("/api/auth/**", "/api/employees/**", "/api/team/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(myUserDetailsService)
