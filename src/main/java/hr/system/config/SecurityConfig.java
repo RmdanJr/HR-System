@@ -27,7 +27,6 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf().disable()
-                .cors().disable()
                 .authorizeRequests(auth -> auth
                         .antMatchers("/h2-console/**").permitAll()
                         .mvcMatchers("/api/auth/**", "/api/employees/**", "/api/team/**").permitAll()
