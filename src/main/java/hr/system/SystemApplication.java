@@ -28,20 +28,20 @@ public class SystemApplication {
     CommandLineRunner commandLineRunner(DepartmentRepository departmentRepository, TeamRepository teamRepository,
                                         EmployeeRepository employeeRepository, PasswordEncoder encoder) {
         return (args) -> {
-            Employee devManager = new Employee("khosy", encoder.encode("khosyPass"), "KHOSY",
+            Employee devManager = new Employee("khosy", encoder.encode("khosy"), "KHOSY",
                     new Date(1970, 1, 1), Gender.MALE, new Date(1992, 7, 1),
                     new Salary(60000), new ArrayList<>());
             employeeRepository.saveAndFlush(devManager);
             Department dev = new Department("Development", devManager, new ArrayList<>(), new ArrayList<>());
             departmentRepository.saveAndFlush(dev);
-            Employee ayman = new Employee("ayman.shebl", encoder.encode("aymanPass"), "Ayman Shebl",
+            Employee ayman = new Employee("ayman", encoder.encode("ayman"), "Ayman Shebl",
                     new Date(1983, 1, 1), Gender.MALE, new Date(2005, 7, 1),
                     new Salary(5000), new ArrayList<>(List.of(new Expertise("Leadership", ExpertiseLevel.EXPERT))));
             ayman.setManager(devManager);
             employeeRepository.saveAndFlush(ayman);
             Team mrc = new Team("MRC", dev, new ArrayList<>(), ayman);
             teamRepository.saveAndFlush(mrc);
-            Employee hassan = new Employee("RmdanJr", encoder.encode("RmdanJrPass"),
+            Employee hassan = new Employee("RmdanJr", encoder.encode("RmdanJr"),
                     "Hassan Ramadan", new Date(2000, 10, 1), Gender.MALE,
                     new Date(2022, 7, 1), new Salary(3000),
                     new ArrayList<Expertise>(Arrays.asList(new Expertise("C++", ExpertiseLevel.EXPERT),

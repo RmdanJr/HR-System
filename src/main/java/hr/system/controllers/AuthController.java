@@ -22,9 +22,11 @@ public class AuthController {
 
     @PostMapping("login")
     public boolean login(@RequestBody UsernameAndPassword usernameAndPassword) {
-        UserDetails user = userDetailsService.loadUserByUsername(usernameAndPassword.getUsername());
-        System.out.println(user.getUsername() + "," + user.getPassword());
-        System.out.println(usernameAndPassword.getUsername() + "," + encoder.encode(usernameAndPassword.getPassword()));
-        return user.getPassword().equals(usernameAndPassword.getPassword());
+        try {
+            UserDetails user = userDetailsService.loadUserByUsername(usernameAndPassword.getUsername());
+            return encoder.matches(usernameAndPassword.getPassword(), user.getPassword());
+        }   catch (Exception e) {
+            return false;
+        }
     }
 }
