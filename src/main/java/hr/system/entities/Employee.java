@@ -1,12 +1,13 @@
 package hr.system.entities;
 
+import hr.system.utils.interfaces.hasIdAndName;
 import hr.system.utils.types.Gender;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class Employee {
+public class Employee implements hasIdAndName {
     @Id
     @GeneratedValue
     @Column(nullable = false, columnDefinition = "uuid")

@@ -6,7 +6,6 @@ import hr.system.entities.Salary;
 import hr.system.mappers.EmployeeMapper;
 import hr.system.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/employees")
 class EmployeeController {
-
     @Autowired
     private final EmployeeService employeeService;
     @Autowired
@@ -31,7 +29,17 @@ class EmployeeController {
     public List<EmployeeDTO> getEmployees() {
         return employeeService.getEmployees().stream()
                 .map(employeeMapper::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    @GetMapping("{id}")
+    public EmployeeDTO getEmployeeInfo(@PathVariable UUID id) {
+        return employeeMapper.convertToDto(employeeService.getEmployeeInfo(id));
+    }
+
+    @GetMapping("{id}/salary")
+    public Salary getEmployeeSalary(@PathVariable UUID id) {
+        return employeeService.getEmployeeSalary(id);
     }
 
     @PostMapping
@@ -49,17 +57,7 @@ class EmployeeController {
         employeeService.deleteEmployee(id);
     }
 
-    @GetMapping("{id}")
-    public EmployeeDTO getEmployeeInfo(@PathVariable UUID id) {
-        return employeeMapper.convertToDto(employeeService.getEmployeeInfo(id));
-    }
-
-    @GetMapping("{id}/salary")
-    public Salary getEmployeeSalary(@PathVariable UUID id) {
-        return employeeService.getEmployeeSalary(id);
-    }
-
-    @PreAuthorize("hasRole('MANAGER')")
+    //    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping("manager/{id}")
     public List<EmployeeDTO> getManagedEmployees(@PathVariable UUID id) {
         return employeeService.getManagedEmployees(id).stream()

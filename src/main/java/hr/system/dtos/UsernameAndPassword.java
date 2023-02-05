@@ -1,4 +1,4 @@
-package hr.system.entities;
+package hr.system.dtos;
 
 public class UsernameAndPassword {
     public String username;

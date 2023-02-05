@@ -1,5 +1,7 @@
 package hr.system.entities;
 
+import hr.system.utils.interfaces.hasIdAndName;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class Department {
+public class Department implements hasIdAndName {
     @Id
     @GeneratedValue
     @Column(nullable = false, columnDefinition = "uuid")
@@ -15,9 +17,9 @@ public class Department {
     private String name;
     @OneToOne(mappedBy = "managedDepartment")
     private Employee manager;
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
     private List<Team> teams = new ArrayList<>();
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
     private List<Employee> employees = new ArrayList<>();
 
     public Department() {

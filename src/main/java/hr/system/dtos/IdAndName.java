@@ -2,14 +2,13 @@ package hr.system.dtos;
 
 import java.util.UUID;
 
-public class EmployeeTeamDTO {
+public class IdAndName {
+
     private UUID id;
     private String name;
-    private String teamLead;
 
-    public EmployeeTeamDTO() {
+    public IdAndName() {
         this.name = "";
-        this.teamLead = "";
     }
 
     public UUID getId() {
@@ -26,13 +25,5 @@ public class EmployeeTeamDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getTeamLead() {
-        return teamLead;
-    }
-
-    public void setTeamLead(String teamLead) {
-        this.teamLead = teamLead;
     }
 }

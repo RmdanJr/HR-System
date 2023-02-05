@@ -35,6 +35,7 @@ public class SystemApplication {
             }
         };
     }
+
     @Bean
     CommandLineRunner commandLineRunner(DepartmentRepository departmentRepository, TeamRepository teamRepository,
                                         EmployeeRepository employeeRepository, PasswordEncoder encoder) {

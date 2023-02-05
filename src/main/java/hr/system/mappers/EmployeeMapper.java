@@ -8,20 +8,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmployeeMapper {
     @Autowired
-    private final EmployeeDepartmentMapper employeeDepartmentMapper;
-    @Autowired
-    private final EmployeeTeamMapper employeeTeamMapper;
+    private final IdAndNameMapper idAndNameMapper;
 
-    public EmployeeMapper(EmployeeDepartmentMapper employeeDepartmentMapper, EmployeeTeamMapper employeeTeamMapper) {
-        this.employeeDepartmentMapper = employeeDepartmentMapper;
-        this.employeeTeamMapper = employeeTeamMapper;
+    public EmployeeMapper(IdAndNameMapper idAndNameMapper) {
+        this.idAndNameMapper = idAndNameMapper;
     }
 
     public EmployeeDTO convertToDto(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        if (employee == null) {
-            return employeeDTO;
-        }
+        if (employee == null) return employeeDTO;
         employeeDTO.setId(employee.getId());
         employeeDTO.setUsername(employee.getUsername());
         employeeDTO.setName(employee.getName());
@@ -30,14 +25,12 @@ public class EmployeeMapper {
         employeeDTO.setGraduationDate(employee.getGraduationDate());
         employeeDTO.setSalary(employee.getSalary());
         employeeDTO.setExpertises(employee.getExpertises());
-        employeeDTO.setDepartment(employeeDepartmentMapper.convertToDto(employee.getDepartment()));
-        employeeDTO.setTeam(employeeTeamMapper.convertToDto(employee.getTeam()));
-        if (employee.getManager() != null) {
-            employeeDTO.setManager(employee.getManager().getName());
-        }
-        employeeDTO.setManagedDepartment(employeeDepartmentMapper.convertToDto(employee.getManagedDepartment()));
-        employeeDTO.setManagedTeam(employeeTeamMapper.convertToDto(employee.getManagedTeam()));
-        employeeDTO.setManagedEmployees(employee.getManagedEmployees().stream().map(Employee::getName).toList());
+        employeeDTO.setDepartment(idAndNameMapper.convertToDto(employee.getDepartment()));
+        employeeDTO.setTeam(idAndNameMapper.convertToDto(employee.getTeam()));
+        employeeDTO.setManager(idAndNameMapper.convertToDto(employee.getManager()));
+        employeeDTO.setManagedDepartment(idAndNameMapper.convertToDto(employee.getManagedDepartment()));
+        employeeDTO.setManagedTeam(idAndNameMapper.convertToDto(employee.getManagedTeam()));
+        employeeDTO.setManagedEmployees(employee.getManagedEmployees().stream().map(idAndNameMapper::convertToDto).toList());
         return employeeDTO;
     }
 }

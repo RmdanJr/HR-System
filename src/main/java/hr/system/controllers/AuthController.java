@@ -1,6 +1,6 @@
 package hr.system.controllers;
 
-import hr.system.entities.UsernameAndPassword;
+import hr.system.dtos.UsernameAndPassword;
 import hr.system.services.JpaUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +25,7 @@ public class AuthController {
         try {
             UserDetails user = userDetailsService.loadUserByUsername(usernameAndPassword.getUsername());
             return encoder.matches(usernameAndPassword.getPassword(), user.getPassword());
-        }   catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }

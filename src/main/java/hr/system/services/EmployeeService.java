@@ -36,7 +36,7 @@ public class EmployeeService {
     @Transactional
     public void deleteEmployee(UUID id) {
         Employee employee = repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
-        if(employee.getManager() == null && !employee.getManagedEmployees().isEmpty()) return;
+        if (employee.getManager() == null && !employee.getManagedEmployees().isEmpty()) return;
         employee.setTeam(null);
         employee.setDepartment(null);
         employee.setManagedTeam(null);

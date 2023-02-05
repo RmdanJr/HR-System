@@ -18,12 +18,12 @@ public class EmployeeDTO {
     private Date graduationDate;
     private Salary salary;
     private List<Expertise> expertises;
-    private EmployeeDepartmentDTO department;
-    private EmployeeTeamDTO team;
-    private String manager;
-    private EmployeeDepartmentDTO managedDepartment;
-    private EmployeeTeamDTO managedTeam;
-    private List<String> managedEmployees = new ArrayList<>();
+    private IdAndName department;
+    private IdAndName team;
+    private IdAndName manager;
+    private IdAndName managedDepartment;
+    private IdAndName managedTeam;
+    private List<IdAndName> managedEmployees = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -89,51 +89,51 @@ public class EmployeeDTO {
         this.expertises = expertises;
     }
 
-    public EmployeeDepartmentDTO getDepartment() {
+    public IdAndName getDepartment() {
         return department;
     }
 
-    public void setDepartment(EmployeeDepartmentDTO department) {
+    public void setDepartment(IdAndName department) {
         this.department = department;
     }
 
-    public EmployeeTeamDTO getTeam() {
+    public IdAndName getTeam() {
         return team;
     }
 
-    public void setTeam(EmployeeTeamDTO team) {
+    public void setTeam(IdAndName team) {
         this.team = team;
     }
 
-    public String getManager() {
+    public IdAndName getManager() {
         return manager;
     }
 
-    public void setManager(String manager) {
+    public void setManager(IdAndName manager) {
         this.manager = manager;
     }
 
-    public EmployeeDepartmentDTO getManagedDepartment() {
+    public IdAndName getManagedDepartment() {
         return managedDepartment;
     }
 
-    public void setManagedDepartment(EmployeeDepartmentDTO managedDepartment) {
+    public void setManagedDepartment(IdAndName managedDepartment) {
         this.managedDepartment = managedDepartment;
     }
 
-    public EmployeeTeamDTO getManagedTeam() {
+    public IdAndName getManagedTeam() {
         return managedTeam;
     }
 
-    public void setManagedTeam(EmployeeTeamDTO managedTeam) {
+    public void setManagedTeam(IdAndName managedTeam) {
         this.managedTeam = managedTeam;
     }
 
-    public List<String> getManagedEmployees() {
+    public List<IdAndName> getManagedEmployees() {
         return managedEmployees;
     }
 
-    public void setManagedEmployees(List<String> managedEmployees) {
+    public void setManagedEmployees(List<IdAndName> managedEmployees) {
         this.managedEmployees = managedEmployees;
     }
 }
