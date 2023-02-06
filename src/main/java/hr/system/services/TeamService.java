@@ -42,11 +42,12 @@ public class TeamService {
         return repository.save(updatedTeam);
     }
 
-    public void deleteTeam(UUID id) {
+    public boolean deleteTeam(UUID id) {
         Optional<Team> team = repository.findById(id);
-        if (team.isEmpty()) return;
+        if (team.isEmpty()) return false;
         team.get().setLead(null);
         team.get().setDepartment(null);
         repository.delete(team.get());
+        return true;
     }
 }

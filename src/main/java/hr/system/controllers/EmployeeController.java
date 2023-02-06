@@ -53,8 +53,8 @@ class EmployeeController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteEmployee(@PathVariable UUID id) {
-        employeeService.deleteEmployee(id);
+    public boolean deleteEmployee(@PathVariable UUID id) {
+        return employeeService.deleteEmployee(id);
     }
 
     //    @PreAuthorize("hasRole('MANAGER')")

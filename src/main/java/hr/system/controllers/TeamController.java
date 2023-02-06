@@ -50,8 +50,8 @@ public class TeamController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteTeam(@PathVariable UUID id) {
-        teamService.deleteTeam(id);
+    public boolean deleteTeam(@PathVariable UUID id) {
+        return teamService.deleteTeam(id);
     }
 
     @GetMapping("{id}/members")

@@ -93,7 +93,7 @@ public class Department implements hasIdAndName {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                (manager != null ? ", manager=" + manager.getName(): "") +
+                (manager != null ? ", manager=" + manager.getName() : "") +
                 ", teams=" + teams.stream().map(Team::getName).toList() +
                 ", employees=" + employees.stream().map(Employee::getName).toList() +
                 '}';

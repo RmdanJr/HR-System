@@ -38,10 +38,11 @@ public class DepartmentService {
     }
 
     @Transactional
-    public void deleteDepartment(UUID id) {
+    public boolean deleteDepartment(UUID id) {
         Optional<Department> department = repository.findById(id);
-        if (department.isEmpty()) return;
+        if (department.isEmpty()) return false;
         department.get().setManager(null);
         repository.delete(department.get());
+        return true;
     }
 }
