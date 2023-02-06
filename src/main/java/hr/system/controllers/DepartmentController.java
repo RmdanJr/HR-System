@@ -30,7 +30,7 @@ public class DepartmentController {
     }
 
     @GetMapping("{id}")
-    public DepartmentDTO getDepartment(UUID id) {
+    public DepartmentDTO getDepartment(@PathVariable UUID id) {
         return departmentMapper.convertToDto(departmentService.getDepartment(id));
     }
 

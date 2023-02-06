@@ -35,7 +35,7 @@ public class TeamController {
     }
 
     @GetMapping("{id}")
-    public TeamDTO getTeam(UUID id) {
+    public TeamDTO getTeam(@PathVariable UUID id) {
         return teamMapper.convertToDto(teamService.getTeam(id));
     }
 
