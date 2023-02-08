@@ -27,22 +27,16 @@ public class Employee implements hasIdAndName {
     })
     private Salary salary;
     @ManyToOne
-    @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
     private Team team;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "EXPERTISE_ID")
     private List<Expertise> expertises = new ArrayList<>();
     @ManyToOne
-    @JoinColumn(name = "MANAGER_ID")
     private Employee manager;
     @OneToOne
-    @JoinColumn(name = "MANAGED_DEPARTMENT_ID")
     private Department managedDepartment;
     @OneToOne
-    @JoinColumn(name = "MANAGED_TEAM_ID")
     private Team managedTeam;
     @OneToMany(mappedBy = "manager")
     private List<Employee> managedEmployees = new ArrayList<>();

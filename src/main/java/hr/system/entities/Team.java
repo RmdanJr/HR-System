@@ -16,7 +16,6 @@ public class Team implements hasIdAndName {
     private UUID id;
     private String name;
     @ManyToOne
-    @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
     @OneToOne(mappedBy = "managedTeam")
     private Employee lead;
