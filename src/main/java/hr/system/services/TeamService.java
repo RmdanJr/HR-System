@@ -6,6 +6,7 @@ import hr.system.entities.Team;
 import hr.system.repositories.EmployeeRepository;
 import hr.system.repositories.TeamRepository;
 import hr.system.utils.exceptions.DepartmentNotFoundException;
+import hr.system.utils.exceptions.EmployeeNotFoundException;
 import hr.system.utils.exceptions.TeamNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,13 @@ public class TeamService {
     public boolean addTeam(TeamDTO teamDTO) {
         try {
             Team newTeam = teamRepository.save(new Team(teamDTO.getName()));
-            if (teamDTO.getLead() != null && teamDTO.getLead().getId() != null)
+            if (teamDTO.getLead() != null && teamDTO.getLead().getId() != null) {
                 employeeRepository.updateManagedTeam(teamDTO.getLead().getId(), newTeam.getId());
+                Employee lead = employeeRepository.findById(teamDTO.getLead().getId())
+                        .orElseThrow(() -> new EmployeeNotFoundException(teamDTO.getLead().getId()));
+                lead.addRole("ROLE_MANAGER");
+                employeeRepository.save(lead);
+            }
             if (teamDTO.getDepartment() != null && teamDTO.getDepartment().getId() != null) {
                 teamRepository.updateDepartment(newTeam.getId(), teamDTO.getDepartment().getId());
             }
@@ -67,8 +73,13 @@ public class TeamService {
             teamRepository.updateName(updatedTeam.getId(), updatedTeam.getName());
             if (outdatedTeam.getLead() != null && outdatedTeam.getLead().getId() != null)
                 employeeRepository.updateManagedTeam(outdatedTeam.getLead().getId(), null);
-            if (updatedTeam.getLead() != null && updatedTeam.getLead().getId() != null)
+            if (updatedTeam.getLead() != null && updatedTeam.getLead().getId() != null) {
                 employeeRepository.updateManagedTeam(updatedTeam.getLead().getId(), updatedTeam.getId());
+                Employee lead = employeeRepository.findById(updatedTeam.getLead().getId())
+                        .orElseThrow(() -> new EmployeeNotFoundException(updatedTeam.getLead().getId()));
+                lead.addRole("ROLE_MANAGER");
+                employeeRepository.save(lead);
+            }
             teamRepository.updateDepartment(outdatedTeam.getId(), null);
             if (updatedTeam.getDepartment() != null && updatedTeam.getDepartment().getId() != null) {
                 teamRepository.updateDepartment(updatedTeam.getId(), updatedTeam.getDepartment().getId());
@@ -92,8 +103,17 @@ public class TeamService {
     public boolean deleteTeam(UUID id) {
         Optional<Team> team = teamRepository.findById(id);
         if (team.isEmpty()) return false;
-        team.get().setLead(null);
+        Employee lead = team.get().getLead();
+        if (lead != null) {
+            lead.setManagedTeam(null);
+            employeeRepository.save(lead);
+        }
         team.get().setDepartment(null);
+        teamRepository.save(team.get());
+        team.get().getMembers().forEach(member -> {
+            member.setTeam(null);
+            employeeRepository.save(member);
+        });
         teamRepository.delete(team.get());
         return true;
     }

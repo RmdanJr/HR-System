@@ -5,6 +5,7 @@ import hr.system.entities.Salary;
 import hr.system.mappers.EmployeeMapper;
 import hr.system.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,32 +32,37 @@ class EmployeeController {
                 .toList();
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("{id}")
     public EmployeeDTO getEmployeeInfo(@PathVariable UUID id) {
         return employeeMapper.convertToDto(employeeService.getEmployeeInfo(id));
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("{id}/salary")
     public Salary getEmployeeSalary(@PathVariable UUID id) {
         return employeeService.getEmployeeSalary(id);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PostMapping
     public boolean addEmployee(@RequestBody EmployeeDTO employee) {
         return employeeService.addEmployee(employee);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PutMapping("{id}")
     public boolean modifyEmployee(@RequestBody EmployeeDTO updatedEmployeeDTO, @PathVariable UUID id) {
         return employeeService.modifyEmployee(updatedEmployeeDTO, id);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @DeleteMapping("{id}")
     public boolean deleteEmployee(@PathVariable UUID id) {
         return employeeService.deleteEmployee(id);
     }
 
-    //    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping("manager/{id}")
     public List<EmployeeDTO> getManagedEmployees(@PathVariable UUID id) {
         return employeeService.getManagedEmployees(id).stream()

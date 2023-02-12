@@ -17,9 +17,9 @@ public class Department implements hasIdAndName {
     private String name;
     @OneToOne(mappedBy = "managedDepartment")
     private Employee manager;
-    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "department")
     private List<Team> teams = new ArrayList<>();
-    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees = new ArrayList<>();
 
     public Department() {

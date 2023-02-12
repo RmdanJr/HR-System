@@ -47,6 +47,10 @@ public class EmployeeService {
             }
             if (employeeDTO.getManager() != null && employeeDTO.getManager().getId() != null) {
                 employeeRepository.updateManager(newEmployee.getId(), employeeDTO.getManager().getId());
+                Employee manager = employeeRepository.findById(employeeDTO.getManager().getId())
+                        .orElseThrow(() -> new EmployeeNotFoundException(employeeDTO.getManager().getId()));
+                manager.addRole("ROLE_MANAGER");
+                employeeRepository.save(manager);
             }
             if (employeeDTO.getManagedDepartment() != null && employeeDTO.getManagedDepartment().getId() != null) {
                 if (!Objects.equals(employeeDTO.getManagedDepartment().getId().toString(), "")) isManager = true;
@@ -62,6 +66,7 @@ public class EmployeeService {
             });
             if (isManager) {
                 newEmployee.addRole("ROLE_MANAGER");
+                employeeRepository.save(newEmployee);
             }
             return true;
         } catch (Exception e) {

@@ -26,6 +26,7 @@ public class AuthController {
     public Credentials login(@RequestBody UsernameAndPassword usernameAndPassword) {
         try {
             Account user = (Account) userDetailsService.loadUserByUsername(usernameAndPassword.getUsername());
+            System.out.println(user.getAuthorities());
             return new Credentials(encoder.matches(usernameAndPassword.getPassword(), user.getPassword()),
                                 user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANAGER")));
         } catch (Exception e) {

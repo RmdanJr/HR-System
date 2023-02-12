@@ -19,7 +19,7 @@ public class Team implements hasIdAndName {
     private Department department;
     @OneToOne(mappedBy = "managedTeam")
     private Employee lead;
-    @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "team")
     private List<Employee> members = new ArrayList<>();
 
     public Team() {

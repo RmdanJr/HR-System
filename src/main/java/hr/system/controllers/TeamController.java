@@ -6,6 +6,7 @@ import hr.system.mappers.EmployeeMapper;
 import hr.system.mappers.TeamMapper;
 import hr.system.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,26 +34,31 @@ public class TeamController {
         return teamService.getTeams().stream().map(teamMapper::convertToDto).toList();
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("{id}")
     public TeamDTO getTeam(@PathVariable UUID id) {
         return teamMapper.convertToDto(teamService.getTeam(id));
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PostMapping
     public boolean addTeam(@RequestBody TeamDTO team) {
         return teamService.addTeam(team);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PutMapping("{id}")
     public boolean modifyTeam(@RequestBody TeamDTO updatedTeam, @PathVariable UUID id) {
         return teamService.modifyTeam(updatedTeam, id);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @DeleteMapping("{id}")
     public boolean deleteTeam(@PathVariable UUID id) {
         return teamService.deleteTeam(id);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping("{id}/members")
     List<EmployeeDTO> getAllMembers(@PathVariable UUID id) {
         return teamService.getTeamMembers(id).stream()

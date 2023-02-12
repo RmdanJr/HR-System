@@ -95,7 +95,8 @@ public class Employee implements hasIdAndName {
     }
 
     public void addRole(String newRole) {
-        this.roles = this.roles + "," + newRole;
+        if (!this.roles.contains(newRole))
+            this.roles = this.roles + "," + newRole;
     }
 
     public Employee getManager() {
