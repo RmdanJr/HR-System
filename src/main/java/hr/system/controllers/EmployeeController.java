@@ -1,7 +1,6 @@
 package hr.system.controllers;
 
 import hr.system.dtos.EmployeeDTO;
-import hr.system.entities.Employee;
 import hr.system.entities.Salary;
 import hr.system.mappers.EmployeeMapper;
 import hr.system.services.EmployeeService;
@@ -43,13 +42,13 @@ class EmployeeController {
     }
 
     @PostMapping
-    public EmployeeDTO addEmployee(@RequestBody Employee employee) {
-        return employeeMapper.convertToDto(employeeService.addEmployee(employee));
+    public boolean addEmployee(@RequestBody EmployeeDTO employee) {
+        return employeeService.addEmployee(employee);
     }
 
     @PutMapping("{id}")
-    public EmployeeDTO modifyEmployee(@RequestBody Employee updatedEmployee, @PathVariable UUID id) {
-        return employeeMapper.convertToDto(employeeService.modifyEmployee(updatedEmployee, id));
+    public boolean modifyEmployee(@RequestBody EmployeeDTO updatedEmployeeDTO, @PathVariable UUID id) {
+        return employeeService.modifyEmployee(updatedEmployeeDTO, id);
     }
 
     @DeleteMapping("{id}")

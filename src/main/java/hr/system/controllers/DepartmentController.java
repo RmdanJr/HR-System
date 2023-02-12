@@ -1,7 +1,6 @@
 package hr.system.controllers;
 
 import hr.system.dtos.DepartmentDTO;
-import hr.system.entities.Department;
 import hr.system.mappers.DepartmentMapper;
 import hr.system.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +34,13 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public DepartmentDTO addDepartment(@RequestBody Department department) {
-        return departmentMapper.convertToDto(departmentService.addDepartment(department));
+    public boolean addDepartment(@RequestBody DepartmentDTO department) {
+        return departmentService.addDepartment(department);
     }
 
     @PutMapping("{id}")
-    public DepartmentDTO modifyDepartment(@RequestBody Department updatedDepartment, @PathVariable UUID id) {
-        return departmentMapper.convertToDto(departmentService.modifyDepartment(updatedDepartment, id));
+    public boolean modifyDepartment(@RequestBody DepartmentDTO updatedDepartment, @PathVariable UUID id) {
+        return departmentService.modifyDepartment(updatedDepartment, id);
     }
 
     @DeleteMapping("{id}")

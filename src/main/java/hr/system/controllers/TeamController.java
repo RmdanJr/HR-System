@@ -2,7 +2,6 @@ package hr.system.controllers;
 
 import hr.system.dtos.EmployeeDTO;
 import hr.system.dtos.TeamDTO;
-import hr.system.entities.Team;
 import hr.system.mappers.EmployeeMapper;
 import hr.system.mappers.TeamMapper;
 import hr.system.services.TeamService;
@@ -40,13 +39,13 @@ public class TeamController {
     }
 
     @PostMapping
-    public TeamDTO addTeam(@RequestBody Team team) {
-        return teamMapper.convertToDto(teamService.addTeam(team));
+    public boolean addTeam(@RequestBody TeamDTO team) {
+        return teamService.addTeam(team);
     }
 
     @PutMapping("{id}")
-    public TeamDTO modifyTeam(@RequestBody Team updatedTeam, @PathVariable UUID id) {
-        return teamMapper.convertToDto(teamService.modifyTeam(updatedTeam, id));
+    public boolean modifyTeam(@RequestBody TeamDTO updatedTeam, @PathVariable UUID id) {
+        return teamService.modifyTeam(updatedTeam, id);
     }
 
     @DeleteMapping("{id}")

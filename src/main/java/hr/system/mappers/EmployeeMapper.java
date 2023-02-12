@@ -31,6 +31,7 @@ public class EmployeeMapper {
         employeeDTO.setManagedDepartment(idAndNameMapper.convertToDto(employee.getManagedDepartment()));
         employeeDTO.setManagedTeam(idAndNameMapper.convertToDto(employee.getManagedTeam()));
         employeeDTO.setManagedEmployees(employee.getManagedEmployees().stream().map(idAndNameMapper::convertToDto).toList());
+        if (employee.getRoles().contains("ROLE_MANAGER")) employeeDTO.isManager = true;
         return employeeDTO;
     }
 }

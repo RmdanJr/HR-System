@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class EmployeeDTO {
+    public boolean isManager = false;
     private UUID id;
     private String username;
+    private String password;
     private String name;
     private Date birthDate;
     private Gender gender;
@@ -39,6 +41,14 @@ public class EmployeeDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

@@ -25,7 +25,7 @@ public class Employee implements hasIdAndName {
             @AttributeOverride(name = "insuranceAmount", column = @Column(name = "INSURANCE_AMOUNT")),
             @AttributeOverride(name = "net", column = @Column(name = "NET_SALARY")),
     })
-    private Salary salary;
+    private Salary salary = new Salary(0);
     @ManyToOne
     private Department department;
     @ManyToOne
@@ -51,14 +51,14 @@ public class Employee implements hasIdAndName {
     }
 
     public Employee(String username, String password, String name, Date birthDate, Gender gender,
-                    Date graduationDate, Salary salary, List<Expertise> expertises) {
+                    Date graduationDate, double gross, List<Expertise> expertises) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
         this.graduationDate = graduationDate;
-        this.salary = salary;
+        this.salary = new Salary(gross);
         this.expertises = expertises;
     }
 
@@ -92,6 +92,10 @@ public class Employee implements hasIdAndName {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public void addRole(String newRole) {
+        this.roles = this.roles + "," + newRole;
     }
 
     public Employee getManager() {
