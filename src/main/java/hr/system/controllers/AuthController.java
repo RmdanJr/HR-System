@@ -1,9 +1,11 @@
 package hr.system.controllers;
 
+import hr.system.dtos.Credentials;
 import hr.system.dtos.UsernameAndPassword;
+import hr.system.entities.Account;
 import hr.system.services.JpaUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,12 +23,13 @@ public class AuthController {
     private PasswordEncoder encoder;
 
     @PostMapping("login")
-    public boolean login(@RequestBody UsernameAndPassword usernameAndPassword) {
+    public Credentials login(@RequestBody UsernameAndPassword usernameAndPassword) {
         try {
-            UserDetails user = userDetailsService.loadUserByUsername(usernameAndPassword.getUsername());
-            return encoder.matches(usernameAndPassword.getPassword(), user.getPassword());
+            Account user = (Account) userDetailsService.loadUserByUsername(usernameAndPassword.getUsername());
+            return new Credentials(encoder.matches(usernameAndPassword.getPassword(), user.getPassword()),
+                                user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANAGER")));
         } catch (Exception e) {
-            return false;
+            return new Credentials(false, false);
         }
     }
 }

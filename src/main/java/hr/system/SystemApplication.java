@@ -33,6 +33,8 @@ public class SystemApplication {
             Employee admin = new Employee("admin", encoder.encode("admin"), "admin");
             admin.addRole("ROLE_MANAGER");
             employeeRepository.saveAndFlush(admin);
+            Employee user = new Employee("user", encoder.encode("user"), "user");
+            employeeRepository.saveAndFlush(user);
         };
     }
 }
