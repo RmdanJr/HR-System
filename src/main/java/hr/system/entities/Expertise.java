@@ -34,7 +34,7 @@ public class Expertise {
         return id;
     }
 
-    public void setDd(UUID dd) {
+    public void setDd(UUID id) {
         this.id = id;
     }
 
